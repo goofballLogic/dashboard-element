@@ -1,0 +1,23 @@
+{
+  "name": "dashboard-element",
+  "version": "0.0.1",
+  "description": "A custom element for dashboards",
+  "main": "js/register-dashboard-element.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/goofballLogic/dashboard-element.git"
+  },
+  "keywords": [
+    "Dashboard",
+    "CustomElement"
+  ],
+  "author": "goofballLogic",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/goofballLogic/dashboard-element/issues"
+  },
+  "homepage": "https://github.com/goofballLogic/dashboard-element#readme"
+}
