@@ -11,13 +11,16 @@
     "url": "git+https://github.com/goofballLogic/dashboard-element.git"
   },
   "keywords": [
-    "Dashboard",
-    "CustomElement"
+    "dashboard",
+    "custom element"
   ],
   "author": "goofballLogic",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/goofballLogic/dashboard-element/issues"
   },
-  "homepage": "https://github.com/goofballLogic/dashboard-element#readme"
+  "homepage": "https://github.com/goofballLogic/dashboard-element#readme",
+  "devDependencies": {
+    "playwright": "^1.25.0"
+  }
 }
