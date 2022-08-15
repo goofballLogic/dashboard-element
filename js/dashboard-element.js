@@ -1,6 +1,6 @@
 export default class DashboardElement extends HTMLElement {
-    constructor() {
-      super();
-      console.log("It's a dashboard");
-    }
+  constructor() {
+    super();
+    this.innerHTML = "It's a dashboard";
+  }
 }
