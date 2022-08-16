@@ -5,7 +5,8 @@
   "main": "js/register-dashboard-element.js",
   "scripts": {
     "test-local": "playwright test --project chromium",
-    "test": "playwright test"
+    "test": "playwright test",
+    "dev-server": "npx http-server ./dist -c0"
   },
   "repository": {
     "type": "git",

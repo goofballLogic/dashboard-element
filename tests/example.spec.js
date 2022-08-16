@@ -1,21 +1,26 @@
 // @ts-check
-const { test, expect } = require('@playwright/test');
+const { test, test: { describe, beforeEach }, expect } = require('@playwright/test');
 
-test('homepage has Playwright in title and get started link linking to the intro page', async ({ page }) => {
-  await page.goto('https://playwright.dev/');
+describe("Given the dashboard component is mounted", () => {
 
-  // Expect a title "to contain" a substring.
-  await expect(page).toHaveTitle(/Playwright/);
+    beforeEach(async ({ page }) => {
 
-  // create a locator
-  const getStarted = page.locator('text=Get Started');
+        page.on("console", console.log.bind(console));
+        await page.goto("http://localhost:8080/html/blank.html");
+        await page.evaluate(function () {
 
-  // Expect an attribute "to be strictly equal" to the value.
-  await expect(getStarted).toHaveAttribute('href', '/docs/intro');
+            document.body.innerHTML = `
+                <dashboard-element></dashboard-element>
+            `;
 
-  // Click the get started link.
-  await getStarted.click();
-  
-  // Expects the URL to contain intro.
-  await expect(page).toHaveURL(/.*intro/);
+        });
+
+    });
+
+    test("something", async ({ page }) => {
+
+        await expect(page.locator("dashboard-element")).toContainText("It's a dashboard");
+
+    });
+
 });
