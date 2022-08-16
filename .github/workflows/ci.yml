@@ -24,7 +24,15 @@ jobs:
     - name: Install Playwright Browsers
       run: npx playwright install --with-deps
 
+    - name: Start dev dev-server
+      run: |
+          npm run dev-server &
+          until $(curl --output /dev/null --head --fail http:/localhost:8080); do
+            printf '.'
+            sleep 1
+          done
+
     - name: Run Playwright tests
       run: |
-        npm run dev-server &
+
         npx playwright test
