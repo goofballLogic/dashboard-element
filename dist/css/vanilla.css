@@ -1,0 +1,12 @@
+dashboard-element {
+    visibility: hidden;
+    display: flex;
+}
+
+dashboard-element.loaded {
+    visibility: visible;
+}
+
+dashboard-item-element:not(.show-detail) .detail {
+    display: none;
+}

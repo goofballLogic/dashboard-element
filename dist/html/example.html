@@ -2,11 +2,27 @@
 <html lang="en-GB">
 
 <head>
-    <script type="module" src="../js/register-dashboard-element.js"></script>
+    <script type="module" src="../js/register-dashboard-elements.js"></script>
+    <script>
+        const style = document.createElement("STYLE");
+        style.innerHTML = "dashboard-element { visibility: hidden; }";
+        document.head.appendChild(style);
+    </script>
+    <link rel="stylesheet" href="../css/vanilla.css">
+    <style>
+        dashboard-item-element.pending {
+            background-color: #EEF;
+        }
+
+    </style>
 </head>
 
 <body>
-    <dashboard-element></dashboard-element>
+    <dashboard-element>
+        <dashboard-item-element title="Thing 1" states="pending,failed,succeeded">
+            <h1>This is some detail</h1>
+        </dashboard-item-element>
+    </dashboard-element>
 </body>
 
 </html>

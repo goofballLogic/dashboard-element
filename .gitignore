@@ -11,3 +11,4 @@ node_modules/
 *.tgz
 
 playwright-report
+*.png
