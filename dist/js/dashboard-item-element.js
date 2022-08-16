@@ -6,12 +6,22 @@ export default class DashboardElementItem extends HTMLElement {
         this.classList.add("loaded");
     }
 
+    static get observedAttributes() { return ["state"]; }
+
+    attributeChangedCallback(name, oldValue, newValue) {
+        if (name === "state" && oldValue !== newValue) {
+            this.state = newValue;
+            this.render();
+        }
+    }
+
     render() {
         const states = this.getAttribute("states").split(",");
         const title = this.getAttribute("title");
         const state = this.getAttribute("state");
         if (states.length) {
             this.state = this.state || state || states[0];
+            this.dataset.state = this.state;
             states.forEach(state => {
                 if (state === this.state) {
                     while (!this.classList.contains(state)) this.classList.add(state);

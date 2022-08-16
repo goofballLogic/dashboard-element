@@ -37,6 +37,7 @@ describe("Background", () => {
         test("Then the item should have the first status by default", async ({ page }) => {
 
             await expect(page.locator("dashboard-item-element")).toHaveClass(/good/);
+            expect(await page.locator("dashboard-item-element").evaluate(e => e.dataset.state)).toEqual("good");
 
         });
 
@@ -44,6 +45,23 @@ describe("Background", () => {
 
             await page.screenshot({ path: "screenshot.png" });
             await expect(page.locator("dashboard-item-element .detail")).not.toBeVisible();
+
+        });
+
+        describe("And the state is changed using the attribute", () => {
+
+            beforeEach(async ({ page }) => {
+
+                await page.locator("dashboard-item-element").evaluate(element => element.setAttribute("state", "so-so"));
+
+            });
+
+            test("Then the item should display the correct status", async ({ page }) => {
+
+                await expect(page.locator("dashboard-item-element")).toHaveClass(/so-so/);
+                expect(await page.locator("dashboard-item-element").evaluate(e => e.dataset.state)).toEqual("so-so");
+
+            });
 
         });
 
