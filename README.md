@@ -4,3 +4,6 @@
 
 # dashboard-element
 Custom element dashboard
+
+## npm package
+https://www.npmjs.com/package/dashboard-element
