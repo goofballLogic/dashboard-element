@@ -10,7 +10,6 @@ jobs:
 
   test:
 
-    timeout-minutes: 60
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
@@ -34,5 +33,4 @@ jobs:
 
     - name: Run Playwright tests
       run: |
-
         npx playwright test
