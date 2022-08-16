@@ -3,9 +3,7 @@
   "version": "0.0.1",
   "description": "A custom element for dashboards",
   "main": "js/register-dashboard-element.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
+  "scripts": {},
   "repository": {
     "type": "git",
     "url": "git+https://github.com/goofballLogic/dashboard-element.git"
@@ -21,6 +19,6 @@
   },
   "homepage": "https://github.com/goofballLogic/dashboard-element#readme",
   "devDependencies": {
-    "playwright": "^1.25.0"
+    "@playwright/test": "^1.25.0"
   }
 }
