@@ -26,5 +26,5 @@ jobs:
 
     - name: Run Playwright tests
       run: |
-        npm run dev-server
+        npm run dev-server &
         npx playwright test
