@@ -3,9 +3,10 @@ on:
     branches:
     - main
 
+name: Continuous Integration
+
 jobs:
-  name: Continuous Integration
-  
+
   e2e-tests:
     runs-on: ubuntu-latest # or macos-latest, windows-latest
 
