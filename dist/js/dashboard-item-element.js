@@ -8,8 +8,10 @@ export default class DashboardElementItem extends HTMLElement {
 
     render() {
         const states = this.getAttribute("states").split(",");
+        const title = this.getAttribute("title");
+        const state = this.getAttribute("state");
         if (states.length) {
-            this.state = this.state || states[0];
+            this.state = this.state || state || states[0];
             states.forEach(state => {
                 if (state === this.state) {
                     while (!this.classList.contains(state)) this.classList.add(state);
@@ -18,7 +20,7 @@ export default class DashboardElementItem extends HTMLElement {
                 }
             });
         }
-        const title = this.getAttribute("title");
+
         this.innerHTML = `
 
             <header>${title}</header>

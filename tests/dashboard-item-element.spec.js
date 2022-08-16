@@ -31,6 +31,7 @@ describe("Background", () => {
             await expect(page.locator("dashboard-item-element")).toHaveClass(/loaded/);
             await expect(page.locator("dashboard-item-element header")).toContainText("Ignition");
             await expect(page.locator("dashboard-item-element .detail")).toContainText("This is some content");
+
         });
 
         test("Then the item should have the first status by default", async ({ page }) => {
@@ -42,7 +43,6 @@ describe("Background", () => {
         test("Then the detail should be hidden", async ({ page }) => {
 
             await page.screenshot({ path: "screenshot.png" });
-
             await expect(page.locator("dashboard-item-element .detail")).not.toBeVisible();
 
         });

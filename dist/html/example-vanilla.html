@@ -9,42 +9,6 @@
         document.head.appendChild(style);
     </script>
     <link rel="stylesheet" href="../css/vanilla.css">
-    <style>
-        * {
-            font-family: Arial, Helvetica, sans-serif;
-            font-size: 12pt;
-        }
-
-        dashboard-item-element {
-            box-shadow: 0 0 3px 0 silver;
-            overflow: hidden;
-        }
-
-        dashboard-item-element header::before {
-            content: " ";
-            position: absolute;
-            top: -21px;
-            left: -21px;
-            transform: rotateZ(45deg);
-            width: 40px;
-            height: 40px;
-            align-self: center;
-        }
-
-        dashboard-item-element.pending header::before {
-            background-color: #DEF;
-        }
-
-        dashboard-item-element.failed header::before {
-            background-color: #F00;
-
-        }
-
-        dashboard-item-element.succeeded header::before {
-            background-color: #0F0;
-        }
-
-    </style>
 </head>
 
 <body>

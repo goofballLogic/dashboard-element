@@ -1,12 +1,43 @@
 dashboard-element {
+
+    --pad-size: 10px;
+    --inner-size: 80px;
+    --outer-size: 100px;
+
     visibility: hidden;
     display: flex;
+    gap: var(--pad-size);
 }
 
 dashboard-element.loaded {
     visibility: visible;
 }
 
+dashboard-item-element {
+    position: relative;
+    border: solid 0.1px silver;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow-wrap: break-word;
+}
+
+dashboard-item-element header {
+    box-sizing: border-box;
+    text-align: center;
+    max-height: var(--inner-size);
+    text-overflow: ellipsis;
+    overflow: hidden;
+    margin: var(--pad-size);
+}
+
 dashboard-item-element:not(.show-detail) .detail {
     display: none;
+    padding: var(--pad-size);
+}
+
+dashboard-item-element:not(.show-detail) {
+    box-sizing: border-box;
+    width: var(--outer-size);
+    height: var(--outer-size);
 }
