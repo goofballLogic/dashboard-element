@@ -3,7 +3,10 @@
   "version": "0.0.1",
   "description": "A custom element for dashboards",
   "main": "js/register-dashboard-element.js",
-  "scripts": {},
+  "scripts": {
+    "test-local": "playwright test --project chromium",
+    "test": "playwright test"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/goofballLogic/dashboard-element.git"
