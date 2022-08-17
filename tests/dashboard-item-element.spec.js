@@ -65,6 +65,23 @@ describe("Background", () => {
 
         });
 
+        describe("And the state is changed using data attributes", () => {
+
+            beforeEach(async ({ page }) => {
+
+                await page.locator("dashboard-item-element").evaluate(element => { element.dataset.state = "so-so" });
+
+            });
+
+            test("Then the item should display the correct status", async ({ page }) => {
+
+                await expect(page.locator("dashboard-item-element")).toHaveClass(/so-so/);
+                await expect(page.locator("dashboard-item-element")).toHaveAttribute("state", "so-so");
+
+            });
+
+        });
+
     });
 
 });

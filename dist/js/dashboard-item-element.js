@@ -2,31 +2,40 @@ export default class DashboardElementItem extends HTMLElement {
 
     connectedCallback() {
         this.details = this.innerHTML;
+        this.syncStateAttribute(this.getAttribute("state") || this.getStates()[0]);
         this.render();
         this.classList.add("loaded");
     }
 
-    static get observedAttributes() { return ["state"]; }
+    static get observedAttributes() { return ["state", "data-state"]; }
 
     attributeChangedCallback(name, oldValue, newValue) {
-        if (name === "state" && oldValue !== newValue) {
-            this.state = newValue;
+        if (["state", "data-state"].includes(name)) {
+            this.syncStateAttribute(newValue);
             this.render();
         }
     }
 
+    syncStateAttribute(value) {
+        const states = this.getStates();
+        if (states.length && states.includes(value)) {
+            if (this.dataset.state !== value)
+                this.dataset.state = value;
+            if (this.getAttribute("state") !== value)
+                this.setAttribute("state", value);
+        }
+    }
+
     render() {
-        const states = this.getAttribute("states").split(",");
+        const states = this.getStates();
         const title = this.getAttribute("title");
         const state = this.getAttribute("state");
         if (states.length) {
-            this.state = this.state || state || states[0];
-            this.dataset.state = this.state;
-            states.forEach(state => {
-                if (state === this.state) {
-                    while (!this.classList.contains(state)) this.classList.add(state);
+            states.forEach(s => {
+                if (s === state) {
+                    while (!this.classList.contains(s)) this.classList.add(s);
                 } else {
-                    while (this.classList.contains(state)) this.classList.remove(state);
+                    while (this.classList.contains(s)) this.classList.remove(s);
                 }
             });
         }
@@ -39,4 +48,8 @@ export default class DashboardElementItem extends HTMLElement {
         `;
     }
 
+
+    getStates() {
+        return this.getAttribute("states").split(",");
+    }
 }
