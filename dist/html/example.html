@@ -7,20 +7,45 @@
         const style = document.createElement("STYLE");
         style.innerHTML = "dashboard-element { visibility: hidden; }";
         document.head.appendChild(style);
-    </script>
-    <link rel="stylesheet" href="../css/vanilla.css">
-    <style>
-        * {
-            font-family: Arial, Helvetica, sans-serif;
-            font-size: 12pt;
+
+        function toggleBodyPrettyClass() {
+            document.body.classList.toggle("pretty");
         }
 
-        dashboard-item-element {
+        function toggleDetailedClassForDashboardItemElements() {
+            for (let el of document.querySelectorAll('dashboard-item-element')) el.classList.toggle('detailed');
+        }
+
+    </script>
+
+    <style>
+        .pretty * {
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 10pt;
+        }
+
+        .pretty dashboard-item-element {
             box-shadow: 0 0 3px 0 silver;
             overflow: hidden;
         }
 
-        dashboard-item-element header::before {
+        .pending {
+            --dashboard-highlight-color: #DEF;
+        }
+
+        .failed {
+            --dashboard-highlight-color: #F00;
+        }
+
+        .succeeded {
+            --dashboard-highlight-color: #0F0;
+        }
+
+        .pretty dashboard-item-element:not(.detailed) .icon {
+            align-self: center;
+        }
+
+        .pretty dashboard-item-element:not(.detailed) header::before {
             content: " ";
             position: absolute;
             top: -21px;
@@ -29,36 +54,60 @@
             width: 40px;
             height: 40px;
             align-self: center;
+            background-color: var(--dashboard-highlight-color);
+            box-shadow: inset 0 0 5px 2px silver;
         }
 
-        dashboard-item-element.pending header::before {
-            background-color: #DEF;
+        .pretty dashboard-item-element.detailed {
+            border-width: 0 0 0 5px;
+            border-style: solid;
+            border-color: var(--dashboard-highlight-color);
+            box-shadow: none;
         }
 
-        dashboard-item-element.failed header::before {
-            background-color: #F00;
-
+        .pretty dashboard-item-element header {
+            display: grid;
+            grid-auto-rows: 1fr;
+            grid-template-columns: 100%;
         }
 
-        dashboard-item-element.succeeded header::before {
-            background-color: #0F0;
+        .pretty dashboard-item-element header>div {
+            min-height: 0;
+        }
+
+        .pretty dashboard-item-element header div:first-of-type {
+            display: flex;
+            flex-direction: column;
         }
 
     </style>
+    <link rel="stylesheet" href="../css/vanilla.css">
 </head>
 
-<body>
+<body class="pretty">
+
+    <button onclick="toggleBodyPrettyClass()">Toggle Pretty styling</button>
+    <button onclick="toggleDetailedClassForDashboardItemElements()"> Toggle detailed class of items </button>
+
+    <br><br>
     <dashboard-element>
-        <dashboard-item-element title="Something very long and sinuous with spots on" states="pending,failed,succeeded">
+        <dashboard-item-element data-title="Something very long and sinuous with spots on"
+            data-states="pending,failed,succeeded" data-img="icon-dei.svg">
             <h1>This is some detail</h1>
         </dashboard-item-element>
-        <dashboard-item-element title="Short" states="pending,failed,succeeded" state="failed">
+
+        <dashboard-item-element data-title="Short" data-states="pending,failed,succeeded" data-state="failed"
+            data-img="icon-gri.svg">
             <h1>This is some detail</h1>
         </dashboard-item-element>
-        <dashboard-item-element title="A medium thing" states="pending,failed,succeeded" state="succeeded">
+
+        <dashboard-item-element data-title="A medium thing" data-states="pending,failed,succeeded"
+            data-state="succeeded" data-img="icon-vel.svg">
             <h1>This is some detail</h1>
         </dashboard-item-element>
     </dashboard-element>
+
+
 </body>
 
 </html>

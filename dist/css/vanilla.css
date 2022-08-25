@@ -3,6 +3,7 @@ dashboard-element {
     --pad-size: 10px;
     --inner-size: 80px;
     --outer-size: 100px;
+    --icon-size: 25px;
 
     visibility: hidden;
     display: flex;
@@ -16,28 +17,44 @@ dashboard-element.loaded {
 dashboard-item-element {
     position: relative;
     border: solid 0.1px silver;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    overflow-wrap: break-word;
 }
 
 dashboard-item-element header {
     box-sizing: border-box;
-    text-align: center;
     max-height: var(--inner-size);
-    text-overflow: ellipsis;
-    overflow: hidden;
+    height: var(--inner-size);
     margin: var(--pad-size);
+    overflow: hidden;
+    display: block;
 }
 
-dashboard-item-element:not(.show-detail) .detail {
+dashboard-item-element:not(.detailed) header {
+    text-align: center;
+}
+
+dashboard-item-element:not(.detailed) header>div {
+    display: flex;
+    justify-content: center;
+}
+
+dashboard-item-element header .icon {
+    width: var(--icon-size);
+    height: var(--icon-size);
+    background-repeat: no-repeat;
+    background-size: contain;
+    display: block;
+}
+
+dashboard-item-element:not(.detailed) .detail {
     display: none;
-    padding: var(--pad-size);
 }
 
-dashboard-item-element:not(.show-detail) {
+dashboard-item-element:not(.detailed) {
     box-sizing: border-box;
     width: var(--outer-size);
     height: var(--outer-size);
+}
+
+dashboard-item-element.detailed .detail {
+    padding: var(--pad-size);
 }

@@ -1,55 +1,95 @@
 export default class DashboardElementItem extends HTMLElement {
 
-    connectedCallback() {
+    constructor() {
+        super();
         this.details = this.innerHTML;
-        this.syncStateAttribute(this.getAttribute("state") || this.getStates()[0]);
-        this.render();
-        this.classList.add("loaded");
     }
 
-    static get observedAttributes() { return ["state", "data-state"]; }
+    connectedCallback() {
+        this.render();
+        ensureClassAdded(this, "loaded");
+    }
+
+    get state() {
+        return this.getAttribute("data-state") || "";
+    }
+
+    get title() {
+        return this.getAttribute("data-title") || "";
+    }
+
+    get states() {
+        return (this.getAttribute("data-states") || "").split(",");
+    }
+
+    get img() {
+        return (this.getAttribute("data-img") || "");
+    }
+
+    get imgAlt() {
+        return (this.getAttribute("data-img-alt") || "");
+    }
+
+    static get observedAttributes() { return ["data-state", "data-title", "data-states", "data-img", "data-img-alt"]; }
 
     attributeChangedCallback(name, oldValue, newValue) {
-        if (["state", "data-state"].includes(name)) {
-            this.syncStateAttribute(newValue);
-            this.render();
+        if (oldValue !== newValue) {
+            if (name === "data-state") {
+                if (this.states.length && !this.states.includes(newValue)) {
+                    if (oldValue)
+                        this.dataset.state = oldValue;
+                    else
+                        this.removeAttribute("data-state");
+                }
+            } else if (name === "data-states") {
+                const states = this.states;
+                if (states.length && !states.includes(this.state))
+                    this.dataset.state = states[0];
+            }
         }
-    }
-
-    syncStateAttribute(value) {
-        const states = this.getStates();
-        if (states.length && states.includes(value)) {
-            if (this.dataset.state !== value)
-                this.dataset.state = value;
-            if (this.getAttribute("state") !== value)
-                this.setAttribute("state", value);
-        }
+        this.render();
     }
 
     render() {
-        const states = this.getStates();
-        const title = this.getAttribute("title");
-        const state = this.getAttribute("state");
-        if (states.length) {
-            states.forEach(s => {
-                if (s === state) {
-                    while (!this.classList.contains(s)) this.classList.add(s);
-                } else {
-                    while (this.classList.contains(s)) this.classList.remove(s);
-                }
-            });
-        }
 
+        const state = this.state;
+        this.states.filter(s => s !== state).forEach(s => {
+            ensureClassRemoved(this, s);
+        });
+        ensureClassAdded(this, state);
         this.innerHTML = `
 
-            <header>${title}</header>
+            <header>
+                <div>${this.renderIcon()}</div>
+                <div>${this.title}</div>
+            </header>
             <section class="detail">${this.details}</section>
 
         `;
     }
 
+    renderIcon() {
 
-    getStates() {
-        return this.getAttribute("states").split(",");
+        const img = this.img;
+        if (!img) return "";
+        else {
+            const style = `background-image: url(${img});`;
+            return `
+                <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=" class="icon" style="${style}">
+            `;
+        }
     }
+
 }
+function ensureClassAdded(el, value) {
+    if (!value) return;
+    while (!el.classList.contains(value))
+        el.classList.add(value);
+}
+
+function ensureClassRemoved(el, value) {
+    if (!value) return;
+    while (el.classList.contains(value))
+        el.classList.remove(value);
+}
+
