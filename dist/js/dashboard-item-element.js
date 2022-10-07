@@ -75,7 +75,11 @@ export default class DashboardElementItem extends HTMLElement {
         else {
             const style = `background-image: url(${img});`;
             return `
-                <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=" class="icon" style="${style}">
+                <img
+                    src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII="
+                    class="icon"
+                    style="${style}"
+                    alt="${this.imgAlt || "icon"}">
             `;
         }
     }

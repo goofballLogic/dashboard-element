@@ -8,7 +8,7 @@ describe("Background", () => {
     beforeEach(async ({ page }) => {
 
         page.on("console", console.log.bind(console));
-        await page.goto("http://localhost:8080/html/blank.html");
+        await page.goto("http://localhost:8082/html/blank.html");
 
     });
 
@@ -28,7 +28,7 @@ describe("Background", () => {
 
         });
 
-        test.only("Then the item status should render as expected", async ({ page }) => {
+        test("Then the item status should render as expected", async ({ page }) => {
 
             await expect(page.locator("dashboard-item-element")).toHaveClass(/loaded/);
             await expect(page.locator("dashboard-item-element header")).toContainText("Ignition");
