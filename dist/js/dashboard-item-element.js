@@ -79,7 +79,8 @@ export default class DashboardElementItem extends HTMLElement {
                     src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII="
                     class="icon"
                     style="${style}"
-                    alt="${this.imgAlt || "icon"}">
+                    alt="${this.imgAlt || "icon"}"
+                    title="${this.imgAlt}">
             `;
         }
     }

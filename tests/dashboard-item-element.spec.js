@@ -8,7 +8,7 @@ describe("Background", () => {
     beforeEach(async ({ page }) => {
 
         page.on("console", console.log.bind(console));
-        await page.goto("http://localhost:8082/html/blank.html");
+        await page.goto("http://localhost:8081/html/blank.html");
 
     });
 
@@ -35,6 +35,7 @@ describe("Background", () => {
             await expect(page.locator("dashboard-item-element .detail")).toContainText("This is some content");
             await expect(page.locator("dashboard-item-element header img")).toHaveCSS("background-image", `url("${exampleImgDataUrl}")`);
             await expect(page.locator("dashboard-item-element header img")).toHaveAttribute("alt", "a star");
+            await expect(page.locator("dashboard-item-element header img")).toHaveAttribute("title", "a star");
 
         });
 

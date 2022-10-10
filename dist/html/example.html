@@ -2,7 +2,7 @@
 <html lang="en-GB">
 
 <head>
-    <script type="module" src="../js/register-dashboard-elements.js"></script>
+    <script type="module" src="../js/define-customElements.js"></script>
     <script>
         const style = document.createElement("STYLE");
         style.innerHTML = "dashboard-element { visibility: hidden; }";
@@ -79,7 +79,6 @@
             display: flex;
             flex-direction: column;
         }
-
     </style>
     <link rel="stylesheet" href="../css/vanilla.css">
 </head>
@@ -97,7 +96,7 @@
         </dashboard-item-element>
 
         <dashboard-item-element data-title="Short" data-states="pending,failed,succeeded" data-state="failed"
-            data-img="icon-gri.svg">
+            data-img="icon-gri.svg" data-img-alt="blah">
             <h1>This is some detail</h1>
         </dashboard-item-element>
 
